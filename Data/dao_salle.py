@@ -32,3 +32,31 @@ class DataSalle:
 
         cursor.close()
         connection.close()
+
+    def update_salle(self, salle):
+        connection = self.get_connection()
+        cursor = connection.cursor()
+
+        requete = """
+        UPDATE salle
+        SET description = %s, categorie = %s, capacite = %s
+        WHERE code = %s
+        """
+        valeurs = (salle.description, salle.categorie, salle.capacite, salle.code)
+
+        cursor.execute(requete, valeurs)
+        connection.commit()
+
+        cursor.close()
+        connection.close()
+
+    def delete_salle(self, code):
+        connection = self.get_connection()
+        cursor = connection.cursor()
+
+        requete = "DELETE FROM salle WHERE code = %s"
+        cursor.execute(requete, (code,))
+        connection.commit()
+
+        cursor.close()
+        connection.close()
