@@ -1,10 +1,9 @@
 from data.dao_salle import DataSalle
+from models.salle import Salle
 
 data_salle = DataSalle()
 
-connexion = data_salle.get_connection()
-if connexion.is_connected():
-    print("Connexion a la base de donnees reussie")
-    connexion.close()
-else:
-    print("Echec de la connexion")
+salle1 = Salle("A101", "Salle informatique", "laboratoire", 30)
+data_salle.insert_salle(salle1)
+
+print("Salle ajoutee avec succes")
